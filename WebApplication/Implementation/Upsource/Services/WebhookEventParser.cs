@@ -12,13 +12,21 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services
 
         public WebhookEventParser()
         {
-            var type = typeof (IEvent);
-            typeMap = typeof(WebhookEventParser).Assembly.GetTypes().Where(p => type.IsAssignableFrom(p) && p.IsClass).ToDictionary(x => x.Name.ToLower());
+            var eventBeanInterfaceType = typeof(IEventBean);
+            typeMap = typeof(WebhookEventParser)
+                .Assembly
+                .GetTypes()
+                .Where(p => p.IsClass && eventBeanInterfaceType.IsAssignableFrom(p))
+                .ToDictionary(
+                    x => x.Name,
+                    x => x,
+                    StringComparer.OrdinalIgnoreCase
+                );
         }
 
         public KeyValuePair<Type, object> Parse(WebhookModel webhookModel)
         {
-            var dataType = typeMap[webhookModel.DataType.ToLower()];
+            var dataType = typeMap[webhookModel.DataType];
             return new KeyValuePair<Type, object>(dataType, webhookModel.Data);
         }
     }

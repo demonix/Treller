@@ -1,5 +1,5 @@
 ﻿using System;
-using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Events;
+using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Events.Network;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services.TypedHandlers
 {
