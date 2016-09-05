@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F57483
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DomainLogic", "DomainLogic\DomainLogic.fsproj", "{69A80494-D742-44D0-886F-B6B452894132}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{4A46C69F-D586-40D6-9E41-8EAE7E0D0935}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A46C69F-D586-40D6-9E41-8EAE7E0D0935}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A46C69F-D586-40D6-9E41-8EAE7E0D0935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A80494-D742-44D0-886F-B6B452894132}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A80494-D742-44D0-886F-B6B452894132}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A80494-D742-44D0-886F-B6B452894132}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A80494-D742-44D0-886F-B6B452894132}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

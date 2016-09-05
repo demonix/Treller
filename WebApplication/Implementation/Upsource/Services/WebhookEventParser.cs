@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Events.Interfaces;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services
@@ -24,10 +23,9 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services
                 );
         }
 
-        public KeyValuePair<Type, object> Parse(WebhookModel webhookModel)
+        public Type Parse(string dataType)
         {
-            var dataType = typeMap[webhookModel.DataType];
-            return new KeyValuePair<Type, object>(dataType, webhookModel.Data);
+            return typeMap[dataType];
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Events.Network;
+﻿using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Events.Network;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services.TypedHandlers
 {
@@ -7,7 +6,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services.Type
     {
         public void Handle(NewRevisionEventBean eventData)
         {
-            Console.WriteLine(eventData.CommitMessage);
+            //Election.chooseBySingle(new Election.Developer(new[] {new Election.Reviewer()}));
         }
     }
 }

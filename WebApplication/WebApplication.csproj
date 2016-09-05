@@ -381,51 +381,20 @@
     <Compile Include="Implementation\TaskList\BusinessObjects\ViewModels\CardProgressInfoViewModel.cs" />
     <Compile Include="Implementation\TaskList\BusinessObjects\ViewModels\CardStageInfoViewModel.cs" />
     <Compile Include="Implementation\TaskList\BusinessObjects\ViewModels\CardStateOverallViewModel.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Converters\IUpsourceUserConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Converters\UpsourceUserConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\DB\User.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\DiscussionFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\EventNetworkToDbMap.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\FeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\IEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\IEventNetworkToDbMap.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\IFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\NewParticipantInReviewFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\NewRevisionEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\ParticipantStateChangedFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\RemovedParticipantFromReviewFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\ReviewCreatedFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\ReviewRemovedFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\ReviewStateChangedFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\ReviewStoppedBranchTrackingFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\RevisionAddedToReviewFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Converters\RevisionRemovedFromReviewFeedEventConverter.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\DiscussionFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\FeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\NewParticipantInReviewFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\NewRevisionEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\ParticipantStateChangedFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\PullRequestMergedFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\RemovedParticipantFromReviewFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\ReviewCreatedFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\ReviewRemovedFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\ReviewStateChangedFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\ReviewStoppedBranchTrackingFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\RevisionAddedToReviewFeedEvent.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\DB\RevisionRemovedFromReviewFeedEvent.cs" />
+    <Compile Include="Implementation\Upsource\BusinessObjects\Converters\IWebhookConverter.cs" />
+    <Compile Include="Implementation\Upsource\BusinessObjects\Converters\WebhookConverter.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Interfaces\IEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\DiscussionFeedEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\FeedEventBaseBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\FeedEventBean.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Interfaces\IEvent.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\NewParticipantInReviewFeedEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\NewRevisionEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Enums\NotificationReason.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Enums\ParticipantRole.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Enums\ParticipantState.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Enums\ReviewState.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Timeline\EventTimeline.cs" />
-    <Compile Include="Implementation\Upsource\BusinessObjects\Events\Timeline\Factories\IEventTimelineFactory.cs" />
+    <Compile Include="Implementation\Upsource\BusinessObjects\Factories\IUpsourceEventFactory.cs" />
+    <Compile Include="Implementation\Upsource\BusinessObjects\Factories\UpsourceEventFactory.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Network\UserIdBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\ParticipantStateChangedFeedEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\PullRequestMergedFeedEventBean.cs" />
@@ -436,12 +405,13 @@
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\ReviewStoppedBranchTrackingFeedEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\RevisionAddedToReviewFeedEventBean.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Events\Network\RevisionRemovedFromReviewFeedEventBean.cs" />
+    <Compile Include="Implementation\Upsource\BusinessObjects\UpsourceEvent.cs" />
+    <Compile Include="Implementation\Upsource\BusinessObjects\Webhook.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\WebhookModel.cs" />
-    <Compile Include="Implementation\Upsource\Repository\EventCommandRepository.cs" />
-    <Compile Include="Implementation\Upsource\Repository\IEventCommandRepository.cs" />
-    <Compile Include="Implementation\Upsource\Repository\IEventTimelineRepository.cs" />
+    <Compile Include="Implementation\Upsource\DomainServices\IUpsourceDomainService.cs" />
+    <Compile Include="Implementation\Upsource\Repository\UpsourceEventRepository.cs" />
+    <Compile Include="Implementation\Upsource\Repository\IUpsourceEventRepository.cs" />
     <Compile Include="Implementation\Upsource\Services\EventHandler.cs" />
-    <Compile Include="Implementation\Upsource\Services\IEventService.cs" />
     <Compile Include="Implementation\Upsource\Services\TypedHandlers\ITypedHandler.cs" />
     <Compile Include="Implementation\Upsource\Services\TypedHandlers\NewRevisionEventBeanHandler.cs" />
     <Compile Include="Implementation\Upsource\Services\IEventHandler.cs" />
@@ -589,15 +559,17 @@
     <None Include="Views\Statistics\Index.cshtml" />
     <None Include="Views\VirtualMachines\ShowLogs.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implementation\Upsource\Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainLogic\DomainLogic.fsproj">
+      <Project>{69a80494-d742-44d0-886f-b6b452894132}</Project>
+      <Name>DomainLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HttpInfrastructure\HttpInfrastructure.csproj">
       <Project>{efa14151-08f6-4647-bced-c891cb1e53f5}</Project>
       <Name>HttpInfrastructure</Name>

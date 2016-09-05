@@ -1,4 +1,5 @@
-﻿using SKBKontur.Treller.WebApplication.Implementation.Services.ErrorService;
+﻿using System.Threading.Tasks;
+using SKBKontur.Treller.WebApplication.Implementation.Services.ErrorService;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.Services;
 
@@ -16,9 +17,9 @@ namespace SKBKontur.Treller.WebApplication.Controllers
             this.eventHandler = eventHandler;
         }
 
-        public void Handle(WebhookModel webhookModel)
+        public async Task Handle(WebhookModel webhookModel)
         {
-            eventHandler.Handle(webhookModel);
+            await eventHandler.HandleAsync(webhookModel).ConfigureAwait(true);
         }
     }
 }
