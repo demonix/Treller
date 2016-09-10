@@ -4,13 +4,7 @@ module Tracking =
     
     open InfrastructureTypes
 
-    type TrackingMachine = TrackingInput -> DeveloperRelations
-
-    and TrackingInput = {
-        Event: Event
-        DeveloperRelations: DeveloperRelations
-    }
-    and Timestamp = Timestamp of double
+    type Timestamp = Timestamp of double
     and User = {
         Name: Name
         Id: ExternalId
@@ -53,9 +47,6 @@ module Tracking =
         | Open
         | Closed
 
-    and DeveloperRelations = {
-        Reviews: seq<Review>
-    }
     and Review = {
         Id: ExternalId
         Timestamp: Timestamp
@@ -72,15 +63,12 @@ module Tracking =
         Incoming: seq<User>
     }
 
-    and ApplyEvent = Event * DeveloperRelations -> seq<Review option>
-    and SelectReviewers = DeveloperRelations -> seq<ReviewerLink>
+    and ApplyEvent = Event * seq<Review> -> seq<Review option>
+    and SelectReviewers = seq<Review> -> seq<ReviewerLink>
     
 
     let private roll(event: Event, review: Review) : Review = 
-        let notUser (first: User) = 
-            fun (second: User) ->
-                second.Id <> first.Id
-                
+        let notUser (first: User) (second: User) = second.Id <> first.Id
         let reviewData = review.Data
 
         let updatedData = 
@@ -121,13 +109,11 @@ module Tracking =
             Data = updatedData
         }
 
-    let private safeRoll (event: Event) =
-        let ``with`` review =
-            match event with
-                | e when e.Timestamp < review.Timestamp -> Option.None
-                | e when e.ReviewId = review.Id -> roll(event, review) |> Option.Some
-                | _ -> review |> Option.Some
-        ``with``
+    let private safeRoll (event: Event) (review: Review) =
+        match event with
+            | e when e.Timestamp < review.Timestamp -> Option.None
+            | e when e.ReviewId = review.Id -> roll(event, review) |> Option.Some
+            | _ -> review |> Option.Some
 
                
                
@@ -158,17 +144,17 @@ module Tracking =
         
 
     let applyEvent : ApplyEvent =
-        fun (event, developerRelations) ->
-            applyEventToReviews(event, developerRelations.Reviews |> Seq.toList) |> Seq.ofList
+        fun (event, reviews) ->
+            applyEventToReviews(event, reviews |> Seq.toList) |> Seq.ofList
 
-    let private buildByAuthor(author: User, reviewers: list<User>) : ReviewerLink =
+    let private buildByAuthor(reviewers: list<User>) (author: User) : ReviewerLink =
         {
             User = author
             Outgoing = list.Empty
             Incoming = reviewers
         }
 
-    let private buildByReviewer(reviewer: User, authors: list<User>) : ReviewerLink =
+    let private buildByReviewer(authors: list<User>) (reviewer: User) : ReviewerLink =
         {
             User = reviewer
             Outgoing = authors
@@ -194,23 +180,23 @@ module Tracking =
     let private mergeLinks(reviewerLinks: seq<ReviewerLink>) : seq<ReviewerLink> =
         reviewerLinks
         |> Seq.groupBy (fun r -> r.User)
-        |> Seq.map (fun (key, collection) -> mergeUserLinks (key, collection))
+        |> Seq.map mergeUserLinks
         
     let private selectLinks(reviewData: ReviewData) : seq<ReviewerLink> =
         let authorLinks = 
             reviewData.Authors 
-            |> List.map (fun (u) -> buildByAuthor(u, reviewData.Reviewers))
+            |> List.map (buildByAuthor reviewData.Reviewers)
                 
         let reviewerLinks = 
             reviewData.Reviewers
-            |> List.map (fun (u) -> buildByReviewer(u, reviewData.Authors))
+            |> List.map (buildByReviewer reviewData.Authors)
                 
-        (authorLinks |> List.append <| reviewerLinks) |> Seq.ofList |> mergeLinks
+        List.append authorLinks reviewerLinks 
+        |> Seq.ofList 
+        |> mergeLinks
 
 
     let selectReviewers : SelectReviewers = 
-        fun (developerRelations) -> 
-            developerRelations.Reviews 
-            |> Seq.map ((fun (r) -> r.Data) >> selectLinks)
-            |> Seq.concat
+        Seq.map ((fun (r) -> r.Data) >> selectLinks) 
+        >> Seq.concat
             
