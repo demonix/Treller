@@ -2,6 +2,7 @@ using System;
 using DomainLogic;
 using SKBKontur.Infrastructure.Common;
 using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models;
+using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repositories.Objects;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Network;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.EventHandlers.Converters
@@ -15,17 +16,17 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
             this.guidFactory = guidFactory;
         }
 
-        public Tracking.User Convert(UserIdBean userIdBean)
+        public Tracking.User ConvertToDomain(UserIdBean userIdBean)
         {
             return new Tracking.User(CommonTypes.Name.NewName(userIdBean.Name), CommonTypes.ExternalId.NewExternalId(userIdBean.Id));
         }
 
-        public Tracking.User Convert(UserModel userModel)
+        public Tracking.User ConvertToDomain(UserModel userModel)
         {
             return new Tracking.User(CommonTypes.Name.NewName(userModel.Name), CommonTypes.ExternalId.NewExternalId(userModel.ExternalId));
         }
 
-        public UserModel Convert(Guid userId, Tracking.User userModel, long timestamp)
+        public UserModel ConvertToModel(Guid userId, Tracking.User userModel, long timestamp)
         {
             return new UserModel
             {
@@ -33,6 +34,28 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
                 ExternalId = userModel.Id.Item,
                 Name = userModel.Name.Item,
                 Timestamp = timestamp
+            };
+        }
+
+        public UserModel ConvertToModel(ReviewerSearchingUser reviewerSearchingUser)
+        {
+            return new UserModel
+            {
+                Id = reviewerSearchingUser.Id,
+                ExternalId = reviewerSearchingUser.ExtnernalUserId,
+                Name = reviewerSearchingUser.Name,
+                Timestamp = reviewerSearchingUser.Timestamp
+            };
+        }
+
+        public ReviewerSearchingUser ConvertToDb(UserModel userModel)
+        {
+            return new ReviewerSearchingUser
+            {
+                Id = userModel.Id,
+                ExtnernalUserId = userModel.ExternalId,
+                Name = userModel.Name,
+                Timestamp = userModel.Timestamp
             };
         }
     }

@@ -267,10 +267,16 @@
     <Compile Include="Implementation\ReviewerSearching\Models\UserModel.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\IReviewerSearchingUserRepository.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\IReviewLinkRepository.cs" />
+    <Compile Include="Implementation\Mongo\Builders\ChangeSetBuilder.cs" />
+    <Compile Include="Implementation\Mongo\Builders\IChangeSetBuilder.cs" />
+    <Compile Include="Implementation\Mongo\ChangeSet.cs" />
+    <Compile Include="Implementation\Mongo\IDbEntity.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\Review.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\ReviewerSearchingUser.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\ReviewLink.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\IReviewRepository.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\ReviewerSearchingUserRepository.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\ReviewLinkRepository.cs" />
     <Compile Include="Implementation\RoundDance\BusinessObjects\Direction.cs" />
     <Compile Include="Implementation\RoundDance\BusinessObjects\DirectionPeriod.cs" />
     <Compile Include="Implementation\RoundDance\BusinessObjects\DirectionTransferViewModel.cs" />

@@ -1,12 +1,13 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
+using SKBKontur.Treller.WebApplication.Implementation.Mongo;
 using SKBKontur.Treller.WebApplication.Implementation.Mongo.Attributes;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Enums;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repositories.Objects
 {
     [MongoTable("Reviews")]
-    public class Review
+    public class Review : IDbEntity
     {
         [BsonId]
         public Guid Id { get; set; }

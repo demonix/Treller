@@ -28,7 +28,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
 
         public ReviewModel[] Handle(NewParticipantInReviewFeedEventBean eventData, ReviewModel[] reviewModels)
         {
-            var participantFs = userConverter.Convert(eventData.Participant);
+            var participantFs = userConverter.ConvertToDomain(eventData.Participant);
             var participantRoleFs = Convert(eventData.Role);
             var newParticipantInReviewFs = new Tracking.NewParticipantInReview(participantFs, participantRoleFs);
             var eventDataFs = Tracking.EventData.NewNewParticipantInReview(newParticipantInReviewFs);

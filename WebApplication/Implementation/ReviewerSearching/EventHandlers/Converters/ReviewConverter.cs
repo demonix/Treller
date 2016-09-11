@@ -31,8 +31,8 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
                 Id = reviewId == Guid.Empty ? guidFactory.Create() : reviewId,
                 ExternalId = review.Id.Item,
                 Timestamp = review.Timestamp.Item,
-                Authors = review.Authors.Select(u => userConverter.Convert(userIdMap.SafeGet(u.Id.Item), u, review.Timestamp.Item)).ToList(),
-                Reviewers = review.Reviewers.Select(u => userConverter.Convert(userIdMap.SafeGet(u.Id.Item), u, review.Timestamp.Item)).ToList(),
+                Authors = review.Authors.Select(u => userConverter.ConvertToModel(userIdMap.SafeGet(u.Id.Item), u, review.Timestamp.Item)).ToList(),
+                Reviewers = review.Reviewers.Select(u => userConverter.ConvertToModel(userIdMap.SafeGet(u.Id.Item), u, review.Timestamp.Item)).ToList(),
                 State = review.State.IsOpen ? ReviewState.Open : ReviewState.Closed
             };
         }
@@ -41,8 +41,8 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
         {
             var externalId = CommonTypes.ExternalId.NewExternalId(reviewModel.ExternalId);
             var timestamp = Tracking.Timestamp.NewTimestamp(reviewModel.Timestamp);
-            var authors = reviewModel.Authors.Select(userConverter.Convert);
-            var reviewers = reviewModel.Reviewers.Select(userConverter.Convert);
+            var authors = reviewModel.Authors.Select(userConverter.ConvertToDomain);
+            var reviewers = reviewModel.Reviewers.Select(userConverter.ConvertToDomain);
             var reviewState = reviewModel.State == ReviewState.Open ? Tracking.ReviewState.Open : Tracking.ReviewState.Closed;
             return new Tracking.Review(externalId, timestamp, ListModule.OfSeq(authors), ListModule.OfSeq(reviewers), reviewState);
         }
@@ -50,7 +50,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
         public ReviewModel[] Convert(List<Review> reviews, List<ReviewLink> reviewLinks, List<ReviewerSearchingUser> reviewerSearchingUsers)
         {
             var reviewLinkGroup = reviewLinks.ToLookup(l => l.ReviewId);
-            var users = reviewerSearchingUsers.ToDictionary(u => u.Id, Convert);
+            var users = reviewerSearchingUsers.ToDictionary(u => u.Id, userConverter.ConvertToModel);
 
             return reviews
                 .Select(r => new ReviewModel
@@ -84,7 +84,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
             var reviewerSearchingUsers = reviewModels.SelectMany(r => r.Authors.Concat(r.Reviewers))
                 .GroupBy(u => u.Id)
                 .Select(g => g.OrderByDescending(u => u.Timestamp).First())
-                .Select(Convert)
+                .Select(userConverter.ConvertToDb)
                 .ToList();
 
             return Tuple.Create(reviews, reviewLinks, reviewerSearchingUsers);
@@ -118,28 +118,6 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
                 .Where(l => l.ParticipantRole == participantRole)
                 .Select(l => users[l.UserId])
                 .ToList();
-        }
-
-        private static UserModel Convert(ReviewerSearchingUser reviewerSearchingUser)
-        {
-            return new UserModel
-            {
-                Id = reviewerSearchingUser.Id,
-                ExternalId = reviewerSearchingUser.ExtnernalUserId,
-                Name = reviewerSearchingUser.Name,
-                Timestamp = reviewerSearchingUser.Timestamp
-            };
-        }
-
-        private static ReviewerSearchingUser Convert(UserModel userModel)
-        {
-            return new ReviewerSearchingUser
-            {
-                Id = userModel.Id,
-                ExtnernalUserId = userModel.ExternalId,
-                Name = userModel.Name,
-                Timestamp = userModel.Timestamp
-            };
         }
     }
 }

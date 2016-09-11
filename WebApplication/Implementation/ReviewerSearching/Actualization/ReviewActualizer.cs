@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using SKBKontur.Treller.WebApplication.Implementation.Mongo.Builders;
 using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.EventHandlers.Converters;
 using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.EventHandlers.Reflection;
 using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repositories;
@@ -15,6 +16,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Actu
         private readonly IReviewerSearchingUserRepository reviewerSearchingUserRepository;
         private readonly IReviewConverter reviewConverter;
         private readonly IEventReflectionProxyFactory eventReflectionProxyFactory;
+        private readonly IChangeSetBuilder changeSetBuilder;
 
         public ReviewActualizer(
             IEventService eventService,
@@ -22,7 +24,8 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Actu
             IReviewRepository reviewRepository,
             IReviewerSearchingUserRepository reviewerSearchingUserRepository,
             IReviewConverter reviewConverter,
-            IEventReflectionProxyFactory eventReflectionProxyFactory
+            IEventReflectionProxyFactory eventReflectionProxyFactory,
+            IChangeSetBuilder changeSetBuilder
             )
         {
             this.eventService = eventService;
@@ -31,6 +34,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Actu
             this.reviewerSearchingUserRepository = reviewerSearchingUserRepository;
             this.reviewConverter = reviewConverter;
             this.eventReflectionProxyFactory = eventReflectionProxyFactory;
+            this.changeSetBuilder = changeSetBuilder;
         }
 
         public async Task ActualizeAsync(long afterTimestamp, int count)
@@ -55,9 +59,15 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Actu
             var dbTuple = reviewConverter.Convert(reviewModels);
             var actualizedReviews = dbTuple.Item1;
             var actualizedReviewLinks = dbTuple.Item2;
-            var actualizedReviewSearchingUsers = dbTuple.Item2;
+            var actualizedReviewSearchingUsers = dbTuple.Item3;
 
-            //todo: написать merge и сохранять в базу
+            var reviewChangeSet = changeSetBuilder.Build(reviews, actualizedReviews);
+            var reviewLinkChangeSet = changeSetBuilder.Build(reviewLinks, actualizedReviewLinks);
+            var reviewSearchingUserChangeSet = changeSetBuilder.Build(reviewerSearchingUsers, actualizedReviewSearchingUsers);
+
+            await reviewRepository.ApplyAsync(reviewChangeSet);
+            await reviewLinkRepository.ApplyAsync(reviewLinkChangeSet);
+            await reviewerSearchingUserRepository.ApplyAsync(reviewSearchingUserChangeSet);
         }
     }
 }
