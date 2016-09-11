@@ -1,7 +1,7 @@
 ﻿namespace DomainLogic
 
 module Election = 
-    open InfrastructureTypes
+    open CommonTypes
     open PositiveNumber
     open NotNegativeNumber
     open Tracking

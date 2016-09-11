@@ -1,8 +1,9 @@
 ﻿using System;
 using DomainLogic;
+using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Network;
 
-namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models.Converters
+namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.EventHandlers.Converters
 {
     public interface IUserConverter
     {

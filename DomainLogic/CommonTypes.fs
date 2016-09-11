@@ -1,6 +1,6 @@
 ﻿namespace DomainLogic
 
-module InfrastructureTypes = 
+module CommonTypes = 
     open System
     
     type Name = 
@@ -11,6 +11,10 @@ module InfrastructureTypes =
     
     type ExternalId = 
         | ExternalId of string
+
+    type Result<'TSuccess,'TError> = 
+     | Success of 'TSuccess 
+     | Error of 'TError
 
 
 module PositiveNumber = 

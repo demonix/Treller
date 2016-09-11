@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using DomainLogic;
+using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models;
 
-namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models.Converters
+namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.EventHandlers.Converters
 {
     public interface IReviewConverter
     {

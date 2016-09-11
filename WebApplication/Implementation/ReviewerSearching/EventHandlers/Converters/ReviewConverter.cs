@@ -5,9 +5,10 @@ using DomainLogic;
 using Microsoft.FSharp.Collections;
 using SKBKontur.BlocksMapping.BlockExtenssions;
 using SKBKontur.Infrastructure.Common;
+using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Enums;
 
-namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Models.Converters
+namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.EventHandlers.Converters
 {
     public class ReviewConverter : IReviewConverter
     {
@@ -37,7 +38,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Mode
 
         public Tracking.Review Convert(ReviewModel reviewModel)
         {
-            var externalId = InfrastructureTypes.ExternalId.NewExternalId(reviewModel.ExternalId);
+            var externalId = CommonTypes.ExternalId.NewExternalId(reviewModel.ExternalId);
             var timestamp = Tracking.Timestamp.NewTimestamp(reviewModel.Timestamp);
             var authors = reviewModel.Authors.Select(userConverter.Convert);
             var reviewers = reviewModel.Reviewers.Select(userConverter.Convert);

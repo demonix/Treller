@@ -1,7 +1,7 @@
 ﻿namespace DomainLogic
 
 module Tracking = 
-    open InfrastructureTypes
+    open CommonTypes
     
     type Timestamp = 
         | Timestamp of int64
@@ -61,7 +61,7 @@ module Tracking =
           Outgoing : seq<User>
           Incoming : seq<User> }
     
-    and ApplyEvent = Event * seq<Review> -> seq<Review option>
+    and ApplyEvent = Event * seq<Review> -> seq<Result<Review, string>>
     
     and BuildReviewerLinks = seq<Review> -> seq<ReviewerLink>
     
@@ -100,9 +100,9 @@ module Tracking =
     
     let private safeRoll (event : Event) (review : Review) = 
         match event with
-        | e when e.Timestamp < review.Timestamp -> None
-        | e when e.ReviewId = review.Id -> roll (event, review) |> Some
-        | _ -> review |> Some
+        | e when e.Timestamp < review.Timestamp -> sprintf "Event timestamp less than review timestamp. Event %A | Review %A" e review |> Error
+        | e when e.ReviewId = review.Id -> roll (event, review) |> Success
+        | _ -> review |> Success
     
     let private createReview (id : ExternalId, timestamp : Timestamp) : Review = 
         { 
@@ -113,13 +113,13 @@ module Tracking =
             State = Open 
         }
     
-    let private applyEventToReviews (event : Event, reviews : list<Review>) : list<Review option> = 
+    let private applyEventToReviews (event : Event, reviews : list<Review>) : list<Result<Review, string>> = 
         match event.Data with
-        | ReviewCreated -> createReview (event.ReviewId, event.Timestamp) :: reviews |> List.map Some
+        | ReviewCreated -> createReview (event.ReviewId, event.Timestamp) :: reviews |> List.map Success
         | ReviewRemoved -> 
             reviews
             |> List.filter (fun review -> review.Id <> event.ReviewId)
-            |> List.map Some
+            |> List.map Success
         | _ -> reviews |> List.map (safeRoll event)
     
     let applyEvent : ApplyEvent = 
