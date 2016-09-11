@@ -7,19 +7,19 @@ namespace SKBKontur.Treller.WebApplication.Controllers
 {
     public class UpsourceEventController : ExceptionHandledController
     {
-        private readonly IEventHandler eventHandler;
+        private readonly IEventService eventService;
 
         public UpsourceEventController(
             IErrorService errorService,
-            IEventHandler eventHandler)
+            IEventService eventService)
             : base(errorService)
         {
-            this.eventHandler = eventHandler;
+            this.eventService = eventService;
         }
 
         public async Task Handle(WebhookModel webhookModel)
         {
-            await eventHandler.HandleAsync(webhookModel).ConfigureAwait(true);
+            await eventService.SaveAsync(webhookModel).ConfigureAwait(true);
         }
     }
 }

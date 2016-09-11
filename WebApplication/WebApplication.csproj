@@ -49,6 +49,10 @@
     <Reference Include="ClearScript">
       <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\ClearScript.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="JavaScriptEngineSwitcher.Core, Version=1.2.4.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.2.4\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
@@ -245,6 +249,21 @@
     <Compile Include="Implementation\Repository\OldBranchesModelBuilder.cs" />
     <Compile Include="Implementation\Repository\RepositoryNotificationBuilder.cs" />
     <Compile Include="Implementation\Repository\RepositoryNotificator.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Actualization\IActualizer.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Bucket\IReviewBucket.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Bucket\IReviewBucketFactory.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Bucket\ReviewBucket.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Bucket\ReviewBucketFactory.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Models\Converters\IReviewConverter.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Models\Converters\IUserConverter.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Models\Converters\ReviewConverter.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Models\Converters\UserConverter.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Models\ReviewModel.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Models\UserModel.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\Review.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\ReviewerSearchingUser.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\ReviewLink.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\IReviewRepository.cs" />
     <Compile Include="Implementation\RoundDance\BusinessObjects\Direction.cs" />
     <Compile Include="Implementation\RoundDance\BusinessObjects\DirectionPeriod.cs" />
     <Compile Include="Implementation\RoundDance\BusinessObjects\DirectionTransferViewModel.cs" />
@@ -408,13 +427,12 @@
     <Compile Include="Implementation\Upsource\BusinessObjects\UpsourceEvent.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\Webhook.cs" />
     <Compile Include="Implementation\Upsource\BusinessObjects\WebhookModel.cs" />
-    <Compile Include="Implementation\Upsource\DomainServices\IUpsourceDomainService.cs" />
-    <Compile Include="Implementation\Upsource\Repository\UpsourceEventRepository.cs" />
-    <Compile Include="Implementation\Upsource\Repository\IUpsourceEventRepository.cs" />
-    <Compile Include="Implementation\Upsource\Services\EventHandler.cs" />
-    <Compile Include="Implementation\Upsource\Services\TypedHandlers\ITypedHandler.cs" />
-    <Compile Include="Implementation\Upsource\Services\TypedHandlers\NewRevisionEventBeanHandler.cs" />
-    <Compile Include="Implementation\Upsource\Services\IEventHandler.cs" />
+    <Compile Include="Implementation\Upsource\Repositories\UpsourceEventRepository.cs" />
+    <Compile Include="Implementation\Upsource\Repositories\IUpsourceEventRepository.cs" />
+    <Compile Include="Implementation\Upsource\Services\EventService.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\IEventBeanHandler.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\NewParticipantInReviewFeedEventBeanHandler.cs" />
+    <Compile Include="Implementation\Upsource\Services\IEventService.cs" />
     <Compile Include="Implementation\Upsource\Services\IWebhookEventParser.cs" />
     <Compile Include="Implementation\Upsource\Services\WebhookEventParser.cs" />
     <Compile Include="Implementation\VirtualMachines\BusinessObjects\AsyncPowershell.cs" />

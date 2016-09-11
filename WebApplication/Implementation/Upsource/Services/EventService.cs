@@ -1,16 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects;
 using SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjects.Factories;
-using SKBKontur.Treller.WebApplication.Implementation.Upsource.Repository;
+using SKBKontur.Treller.WebApplication.Implementation.Upsource.Repositories;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services
 {
-    public class EventHandler : IEventHandler
+    public class EventService : IEventService
     {
         private readonly IUpsourceEventFactory upsourceEventFactory;
         private readonly IUpsourceEventRepository upsourceEventRepository;
 
-        public EventHandler(
+        public EventService(
             IUpsourceEventFactory upsourceEventFactory,
             IUpsourceEventRepository upsourceEventRepository
             )
@@ -19,10 +20,15 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.Services
             this.upsourceEventRepository = upsourceEventRepository;
         }
 
-        public async Task HandleAsync(WebhookModel webhookModel)
+        public Task SaveAsync(WebhookModel webhookModel)
         {
             var upsourceEvent = upsourceEventFactory.Create(webhookModel);
-            await upsourceEventRepository.InsertAsync(upsourceEvent).ConfigureAwait(true);
+            return upsourceEventRepository.InsertAsync(upsourceEvent);
+        }
+
+        public Task<List<UpsourceEvent>> EnumerateAsync(long afterTimestamp, int count)
+        {
+            return upsourceEventRepository.EnumerateAsync(afterTimestamp, count);
         }
     }
 }
