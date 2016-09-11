@@ -15,5 +15,8 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repo
 
         [BsonElement("Name")]
         public string Name { get; set; }
+
+        [BsonElement("Timestamp")]
+        public long Timestamp { get; set; }
     }
 }

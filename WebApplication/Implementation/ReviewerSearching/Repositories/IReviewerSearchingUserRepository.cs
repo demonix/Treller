@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repositories.Objects;
 
 namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repositories
 {
-    public interface IReviewRepository
+    public interface IReviewerSearchingUserRepository
     {
-        Task<List<Review>> SelectAsync(string[] externalReviewIds);
+        Task<List<ReviewerSearchingUser>> SelectAsync(Guid[] userIds);
     }
 }

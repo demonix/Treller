@@ -9,6 +9,6 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
     {
         Tracking.User Convert(UserIdBean userIdBean);
         Tracking.User Convert(UserModel userModel);
-        UserModel Convert(Guid userId, Tracking.User userModel);
+        UserModel Convert(Guid userId, Tracking.User userModel, long timestamp);
     }
 }

@@ -25,13 +25,14 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
             return new Tracking.User(CommonTypes.Name.NewName(userModel.Name), CommonTypes.ExternalId.NewExternalId(userModel.ExternalId));
         }
 
-        public UserModel Convert(Guid userId, Tracking.User userModel)
+        public UserModel Convert(Guid userId, Tracking.User userModel, long timestamp)
         {
             return new UserModel
             {
                 Id = userId == Guid.Empty ? guidFactory.Create() : userId,
                 ExternalId = userModel.Id.Item,
-                Name = userModel.Name.Item
+                Name = userModel.Name.Item,
+                Timestamp = timestamp
             };
         }
     }

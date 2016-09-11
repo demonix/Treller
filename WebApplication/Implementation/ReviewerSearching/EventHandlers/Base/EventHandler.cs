@@ -26,7 +26,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Even
                 .Distinct()
                 .ToDictionary(r => r.ExternalId, r => r.Id);
 
-            var reviewsFs = reviewModels.Select(reviewConverter.Convert).ToArray();
+            var reviewsFs = reviewModels.Select(reviewConverter.ConvertToDomain).ToArray();
 
             var optionReviewsFs = Tracking.applyEvent(@event, reviewsFs);
 

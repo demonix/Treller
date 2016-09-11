@@ -7,5 +7,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjec
     {
         [JsonProperty("base")]
         public FeedEventBean Base { get; set; }
+
+        public string ReviewId => Base.ReviewNumber?.ToString();
     }
 }

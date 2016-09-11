@@ -23,5 +23,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjec
 
         [JsonProperty("feedEventId")]
         public string FeedEventId { get; set; }
+
+        public string ReviewId => ReviewNumber?.ToString();
     }
 }

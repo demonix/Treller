@@ -7,5 +7,6 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Mode
         public Guid Id { get; set; }
         public string ExternalId { get; set; }
         public string Name { get; set; }
+        public long Timestamp { get; set; }
     }
 }

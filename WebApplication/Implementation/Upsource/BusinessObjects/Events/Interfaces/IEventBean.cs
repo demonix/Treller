@@ -2,6 +2,6 @@
 {
     public interface IEventBean
     {
-
+        string ReviewId { get; }
     }
 }

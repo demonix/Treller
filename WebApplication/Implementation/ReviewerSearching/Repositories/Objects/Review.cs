@@ -16,5 +16,8 @@ namespace SKBKontur.Treller.WebApplication.Implementation.ReviewerSearching.Repo
 
         [BsonElement("State")]
         public ReviewState State { get; set; }
+
+        [BsonElement("Timestamp")]
+        public long Timestamp { get; set; }
     }
 }

@@ -250,6 +250,7 @@
     <Compile Include="Implementation\Repository\RepositoryNotificationBuilder.cs" />
     <Compile Include="Implementation\Repository\RepositoryNotificator.cs" />
     <Compile Include="Implementation\ReviewerSearching\Actualization\IActualizer.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Actualization\ReviewActualizer.cs" />
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\Base\IEventHandler.cs" />
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\Base\EventHandler.cs" />
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\Builders\EventBuilder.cs" />
@@ -258,8 +259,14 @@
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\Converters\IUserConverter.cs" />
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\Converters\ReviewConverter.cs" />
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\Converters\UserConverter.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Reflection\EventReflectionProxy.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Reflection\EventReflectionProxyFactory.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Reflection\IEventReflectionProxy.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Reflection\IEventReflectionProxyFactory.cs" />
     <Compile Include="Implementation\ReviewerSearching\Models\ReviewModel.cs" />
     <Compile Include="Implementation\ReviewerSearching\Models\UserModel.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\IReviewerSearchingUserRepository.cs" />
+    <Compile Include="Implementation\ReviewerSearching\Repositories\IReviewLinkRepository.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\Review.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\ReviewerSearchingUser.cs" />
     <Compile Include="Implementation\ReviewerSearching\Repositories\Objects\ReviewLink.cs" />
@@ -433,8 +440,8 @@
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\IEventBeanHandler.cs" />
     <Compile Include="Implementation\ReviewerSearching\EventHandlers\NewParticipantInReviewFeedEventBeanHandler.cs" />
     <Compile Include="Implementation\Upsource\Services\IEventService.cs" />
-    <Compile Include="Implementation\Upsource\Services\IWebhookEventParser.cs" />
-    <Compile Include="Implementation\Upsource\Services\WebhookEventParser.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Reflection\IWebhookEventParser.cs" />
+    <Compile Include="Implementation\ReviewerSearching\EventHandlers\Reflection\WebhookEventParser.cs" />
     <Compile Include="Implementation\VirtualMachines\BusinessObjects\AsyncPowershell.cs" />
     <Compile Include="Implementation\VirtualMachines\BusinessObjects\CommandExecute.cs" />
     <Compile Include="Implementation\VirtualMachines\BusinessObjects\CommandExecuteResult.cs" />

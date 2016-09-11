@@ -19,5 +19,7 @@ namespace SKBKontur.Treller.WebApplication.Implementation.Upsource.BusinessObjec
 
         [JsonProperty("date")]
         public double? CommitTimestamp { get; set; }
+
+        public string ReviewId => null;
     }
 }
