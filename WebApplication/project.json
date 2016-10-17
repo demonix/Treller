@@ -44,12 +44,11 @@
     },
 
     "frameworks": {
-        "net461": {
-            "frameworkAssemblies": {
-                "System.Web": "4.0.0.0",
-                "System.Web.Abstractions": "4.0.0.0",
-                "System.Web.Routing": "4.0.0.0"
-            }
+        "netcoreapp1.0": {
+            "imports": [
+                "dotnet5.6",
+                "portable-net45+win8"
+            ]
         }
     },
 
